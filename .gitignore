@@ -1,0 +1,5 @@
+spec-v1.md
+spec-v2.md
+node_modules/
+*.db
+.DS_Store
