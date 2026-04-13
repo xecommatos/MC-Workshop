@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "server-v1",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["server.js"],
+      "port": 3000
+    },
+    {
+      "name": "server-v2",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["server-v2.js"],
+      "port": 3000
+    }
+  ]
+}

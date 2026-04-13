@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moderação — Confissões UMinho</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0f0f13;
+      color: #e2e2e8;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #17171f;
+      border-bottom: 1px solid #2a2a38;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header h1 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+
+    header h1 span { color: #f05a5a; }
+
+    .logout {
+      font-size: 0.8rem;
+      color: #555570;
+      text-decoration: none;
+      padding: 6px 12px;
+      border: 1px solid #2a2a38;
+      border-radius: 8px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .logout:hover { color: #e2e2e8; border-color: #555570; }
+
+    .main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #555570;
+      margin-bottom: 16px;
+    }
+
+    .empty {
+      color: #555570;
+      font-size: 0.95rem;
+      text-align: center;
+      padding: 48px 0;
+    }
+
+    .confession-card {
+      background: #17171f;
+      border: 1px solid #2a2a38;
+      border-radius: 14px;
+      padding: 18px 22px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .confession-body { flex: 1; min-width: 0; }
+
+    .confession-text {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #e2e2e8;
+      margin-bottom: 10px;
+      word-break: break-word;
+    }
+
+    .confession-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tag {
+      background: #7c6af720;
+      color: #9d90f8;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      border: 1px solid #7c6af730;
+    }
+
+    .timestamp { font-size: 0.72rem; color: #555570; }
+
+    .delete-form { flex-shrink: 0; }
+
+    .delete-btn {
+      background: transparent;
+      border: 1px solid #3a2a2a;
+      border-radius: 8px;
+      padding: 6px 14px;
+      color: #c05050;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+
+    .delete-btn:hover {
+      background: #f05a5a15;
+      border-color: #f05a5a;
+      color: #f05a5a;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Moderação <span>Admin</span></h1>
+  <a class="logout" href="/">Sair</a>
+</header>
+
+<div class="main">
+  <div class="section-label">Todas as confissões</div>
+
+  <% if (confessions.length === 0) { %>
+    <p class="empty">Nenhuma confissão.</p>
+  <% } else { %>
+    <% confessions.forEach(function(confession) { %>
+      <div class="confession-card">
+        <div class="confession-body">
+          <div class="confession-text"><%- confession.text %></div>
+          <div class="confession-meta">
+            <span class="tag"><%= confession.tag %></span>
+            <span class="timestamp"><%= confession.created_at %></span>
+          </div>
+        </div>
+        <div class="delete-form">
+          <form action="/admin/delete/<%= confession.id %>" method="POST">
+            <button class="delete-btn" type="submit">Apagar</button>
+          </form>
+        </div>
+      </div>
+    <% }); %>
+  <% } %>
+</div>
+
+</body>
+</html>
